@@ -1,0 +1,14 @@
+html, body, #cards {
+    height: 100%;
+}
+
+.card {
+    width: 25%;
+    height: 33.333%;
+    background-color: rgb(128, 128, 128);
+    position: relative;
+    display: block;
+    float: left;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
