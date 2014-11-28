@@ -4,32 +4,30 @@ var selectedCards = 0;
 
 function clearSelected() {
     for (var i=0; i<cards.children.length; i++) {
-        cards.children[i].style.backgroundColor = "rgb(100, 100, 100)";
+        cards.children[i].style.borderWidth = "1px";
         selectedCards = 0;
     }
 }
 
 clearSelected();
 
-function clearCondition() {
+function clearOnCondition() {
     if (selectedCards === 3) {
         clearSelected();
-        // console.log("should clear now");
     }
 }
 
-function toggleCard() {
-    if (this.style.backgroundColor === "rgb(100, 100, 100)") {
-        this.style.backgroundColor = "rgb(90, 90, 90)";
-        // setTimeout(function(){selectedCards++}, 1000);
+function toggleSelectedState() {
+    if (this.style.borderWidth === "1px") {
+        this.style.borderWidth = "3px";
         selectedCards++;
     } else {
-        this.style.backgroundColor = "rgb(100, 100, 100)";
+        this.style.borderWidth = "1px";
         selectedCards--;
     }
-    setTimeout(clearCondition,1250);
+    setTimeout(clearOnCondition, 1250);
 }
 
 for (var i=0; i<cards.children.length; i++) {
-    cards.children[i].onclick = toggleCard;
+    cards.children[i].onclick = toggleSelectedState;
 }

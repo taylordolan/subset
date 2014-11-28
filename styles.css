@@ -5,10 +5,13 @@ html, body, #cards {
 .card {
     width: 25%;
     height: 33.333%;
-    background-color: rgb(128, 128, 128);
+    background-color: rgb(100, 100, 100);
     position: relative;
     display: block;
     float: left;
     border: 1px solid black;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(0, 0, 0);
     box-sizing: border-box;
 }
