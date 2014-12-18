@@ -14,6 +14,38 @@ function setUp() {
             card.classList.add("styleB");
         }
     }
+}
+
+function removeSelectedCards() {
+    var selectedCards = document.getElementsByClassName("selected");
+    var numSelectedCards = selectedCards.length;
+    var parent = selectedCards[0].parentNode;
+
+    for (i=0; i<numSelectedCards; i++) {
+        parent.removeChild(selectedCards[0]);
+    }
+}
+
+function dealCards(times) {
+    for (i=0;i<times;i++) {
+        createCard();
+    }
+}
+
+function createCard() {
+    var table = document.getElementById("cards");
+    var card = document.createElement("div");
+    card.classList.add("card");
+    card.classList.add("unselected");
+
+    if (Math.random()<0.5) {
+            card.classList.add("styleA");
+        } else {
+            card.classList.add("styleB");
+        }
+
+
+    table.appendChild(card);
 
 }
 
@@ -51,9 +83,9 @@ function checkIfMatched() {
             }
         }
     } else {
-        console.log("error");
+        console.log("hey there's an error");
     }
-
+    
     if (matched == 3) {
         score++;
     }
