@@ -4,18 +4,6 @@ var selectedCards = 0;
 var score = 0;
 var scoreBox = document.getElementById("score");
 
-function setUp() {
-    for (var i=0; i<cards.children.length; i++) {
-        var card = cards.children[i];
-        card.classList.add("unselected");
-        if (Math.random()<0.5) {
-            card.classList.add("styleA");
-        } else {
-            card.classList.add("styleB");
-        }
-    }
-}
-
 function removeSelectedCards() {
     var selectedCards = document.getElementsByClassName("selected");
     var numSelectedCards = selectedCards.length;
@@ -44,22 +32,12 @@ function createCard() {
     table.appendChild(card);
 }
 
-function clearSelected() {
+function deselectAllCards() {
     for (var i=0; i<cards.children.length; i++) {
         cards.children[i].classList.remove("selected");
         selectedCards = 0;
     }
 }
-
-setUp();
-
-// function clearOnCondition() {
-//     if (selectedCards === 3) {
-//         selectedCardsMatch();
-//         clearSelected();
-//         scoreBox.innerHTML = score;
-//     }
-// }
 
 function doSelectedCardsMatch() {
     var selectedCards = document.getElementsByClassName("selected");
@@ -87,6 +65,8 @@ function doSelectedCardsMatch() {
     }
 }
 
+dealCards(12);
+
 document.body.onclick = function(e) {
     
     if (e.target.classList.contains("card")) {
@@ -102,7 +82,7 @@ document.body.onclick = function(e) {
                 scoreBox.innerHTML = score;
                 setTimeout(dealCards(3), 1500);
             } else {
-                setTimeout(clearSelected, 500);
+                setTimeout(deselectAllCards, 500);
             }
             selectedCards = 0;
         }
