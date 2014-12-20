@@ -11,9 +11,6 @@ html, body, #cards {
     border-style: solid;
     border-color: rgb(0, 0, 0);
     box-sizing: border-box;
-}
-
-.unselected {
     border-width: 1px;
 }
 

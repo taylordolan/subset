@@ -36,71 +36,131 @@ function createCard() {
     var table = document.getElementById("cards");
     var card = document.createElement("div");
     card.classList.add("card");
-    card.classList.add("unselected");
-
     if (Math.random()<0.5) {
             card.classList.add("styleA");
         } else {
             card.classList.add("styleB");
         }
-
-
     table.appendChild(card);
-
 }
 
 function clearSelected() {
     for (var i=0; i<cards.children.length; i++) {
         cards.children[i].classList.remove("selected");
-        cards.children[i].classList.add("unselected");
         selectedCards = 0;
     }
 }
 
 setUp();
 
-function clearOnCondition() {
-    if (selectedCards === 3) {
-        checkIfMatched();
-        clearSelected();
-        scoreBox.innerHTML = score;
-    }
-}
+// function clearOnCondition() {
+//     if (selectedCards === 3) {
+//         selectedCardsMatch();
+//         clearSelected();
+//         scoreBox.innerHTML = score;
+//     }
+// }
 
-function checkIfMatched() {
-    var setOfCards = document.getElementsByClassName("selected");
+function doSelectedCardsMatch() {
+    var selectedCards = document.getElementsByClassName("selected");
     var matched = 0;
-    if (setOfCards[0].classList.contains("styleA")) {
-        for (var i=0; i<setOfCards.length; i++) {
-            if (setOfCards[i].classList.contains("styleA")) {
+    if (selectedCards[0].classList.contains("styleA")) {
+        for (var i=0; i<selectedCards.length; i++) {
+            if (selectedCards[i].classList.contains("styleA")) {
                 matched++;
             }
         }
-    } else if (setOfCards[0].classList.contains("styleB")) {
-        for (var i=0; i<setOfCards.length; i++) {
-            if (setOfCards[i].classList.contains("styleB")) {
+    } else if (selectedCards[0].classList.contains("styleB")) {
+        for (var i=0; i<selectedCards.length; i++) {
+            if (selectedCards[i].classList.contains("styleB")) {
                 matched++;
             }
         }
     } else {
         console.log("hey there's an error");
     }
+
+    if (matched === 3) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+document.body.onclick = function(e) {
     
-    if (matched == 3) {
-        score++;
+    if (e.target.classList.contains("card")) {
+        var card = e.target
+        if (!card.classList.contains("selected"))
+            selectedCards++;
+        card.classList.toggle("selected");
+
+        if (selectedCards === 3) {
+            if (doSelectedCardsMatch()) {
+                setTimeout(removeSelectedCards, 500);
+                score++;
+                scoreBox.innerHTML = score;
+                setTimeout(dealCards(3), 1500);
+            } else {
+                setTimeout(clearSelected, 500);
+            }
+            selectedCards = 0;
+        }
     }
 }
 
-function toggleSelectedState() {
-    if (this.classList.contains("unselected")) {
-        selectedCards++;
-    }
-    this.classList.toggle("unselected");
-    this.classList.toggle("selected");
+// var state = {}
+// state.whatever // "Things!"
+// state.card = function() {
+//     return "Card!"
+// }
+// state.card // function(){}
+// state.card() // "Card!"
+// state.deck = []
+// state.deck = (function(){
+//     var ret = []
+//     for (var i = 0; i < 5; i++){
+//         ret.push(state.card());
+//     }
+//     return ret;
+// }());
 
-    setTimeout(clearOnCondition, 1250);
-}
+// state.deck // 
 
-for (var i=0; i<cards.children.length; i++) {
-    cards.children[i].onclick = toggleSelectedState;
-}
+// function registerDocumentClickable(func, key) {
+//     state.document_clickables = state.document_clickables ? state.document_clickables : {};
+//     state.document_clickables[key] = func;
+// }
+
+
+// document.body.onclick = whatDoINameYou;
+
+// function whatDoINameYou() {
+    // document.body.onclick = function(eventObject) {
+    //     for (var key in state.document_clickables){
+    //         state.document_clickables[key](eventObject);
+    //     }
+    // }
+
+    // function cardClick(clickEventObject) {
+    //     var target = clickEventObject.target;
+    //     if (target.classList.contains("card")) {
+    //         toggleSelectedState(target);
+    //     }
+    // }
+
+    // function someOtherClickThing(clickEventObject) {
+    //     // do something else here.
+    //     console.log(clickEventObject);
+    // }
+
+    // registerDocumentClickable(someOtherClickThing, "someOtherClickThing");
+    // registerDocumentClickable(cardClick, "cardClick");
+
+// }
+
+// document.body.onclick([ native code that outputs the event object]);
+
+
+// whatDoINameYou();
+
