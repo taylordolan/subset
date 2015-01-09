@@ -1,35 +1,49 @@
 
 var cards = document.getElementById("cards");
+var scoreBox = document.getElementById("score");
 var selectedCards = 0;
 var score = 0;
-var scoreBox = document.getElementById("score");
+var deck = [];
 
 function removeSelectedCards() {
-    var selectedCards = document.getElementsByClassName("selected");
-    var numSelectedCards = selectedCards.length;
-    var parent = selectedCards[0].parentNode;
-
-    for (i=0; i<numSelectedCards; i++) {
-        parent.removeChild(selectedCards[0]);
+    var chosenCards = document.getElementsByClassName("selected");
+    var numChosenCards = chosenCards.length;
+    var parent = chosenCards[0].parentNode;
+    for (i=0; i<numChosenCards; i++) {
+        deck.push(chosenCards[i])
+    }
+    for (i=0; i<numChosenCards; i++) {
+        parent.removeChild(chosenCards[0]);
+    }
+    for (i=0; i<deck.length; i++) {
+        card = deck[i];
+        card.classList.remove("selected");
     }
 }
 
-function dealCards(times) {
-    for (i=0;i<times;i++) {
-        createCard();
-    }
-}
-
-function createCard() {
-    var table = document.getElementById("cards");
+function createCard(n) {
     var card = document.createElement("div");
+    var number = document.createElement("p");
     card.classList.add("card");
-    if (Math.random()<0.5) {
-            card.classList.add("styleA");
-        } else {
-            card.classList.add("styleB");
-        }
-    table.appendChild(card);
+    if (Math.random()<0.5)
+        card.classList.add("styleA");
+    else
+        card.classList.add("styleB");
+    number.innerHTML = n;
+    card.appendChild(number);
+    return card;
+}
+
+for (i=0;i<81;i++) {
+    deck.push(createCard(i));
+}
+
+function dealCards(n) {
+    for(i=0; i<n; i++) {
+        position = Math.floor(Math.random()*deck.length)
+        cards.appendChild(deck[position]);
+        deck.splice(position, 1);
+    }
 }
 
 function deselectAllCards() {
@@ -71,8 +85,12 @@ document.body.onclick = function(e) {
     
     if (e.target.classList.contains("card")) {
         var card = e.target
-        if (!card.classList.contains("selected"))
+        if (!card.classList.contains("selected")) {
             selectedCards++;
+        } else {
+            selectedCards--;
+        }
+
         card.classList.toggle("selected");
 
         if (selectedCards === 3) {
@@ -80,7 +98,7 @@ document.body.onclick = function(e) {
                 setTimeout(removeSelectedCards, 500);
                 score++;
                 scoreBox.innerHTML = score;
-                setTimeout(dealCards(3), 1500);
+                dealCards(3);
             } else {
                 setTimeout(deselectAllCards, 500);
             }
