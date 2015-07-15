@@ -1,6 +1,7 @@
 
 var cards = document.getElementById("cards");
 var scoreBox = document.getElementById("score");
+var selectedCards = 0;
 var score = 0;
 var deck = [];
 
@@ -80,8 +81,6 @@ function doSelectedCardsMatch() {
   }
 }
 
-card
-
 // SETUP
 
 // create 81 cards and puts them in deck
@@ -94,7 +93,6 @@ dealCards(12);
 // END SETUP
 
 document.body.onclick = function(e) {
-  var numSelectedCards;
 
   // increments and decrements the number of selected cards when a card is clicked
   if (e.target.classList.contains("card")) {
