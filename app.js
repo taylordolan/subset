@@ -1,4 +1,3 @@
-
 var cards = document.getElementById("cards");
 var scoreBox = document.getElementById("score");
 var selectedCards = 0;
@@ -8,12 +7,14 @@ var deck = [];
 function removeSelectedCards() {
   var chosenCards = document.getElementsByClassName("selected");
   var parent = chosenCards[0].parentNode;
+  // this variable needs to exist because chosenCards.length changes with each card that is removed
+  var numSelectedCards = chosenCards.length
   // adds selected cards back to the deck
-  for (i=0; i<chosenCards.length; i++) {
+  for (i=0; i<numSelectedCards; i++) {
     deck.push(chosenCards[i])
   }
   // removes selected cards from table
-  for (i=0; i<chosenCards.length; i++) {
+  for (i=0; i<numSelectedCards; i++) {
     parent.removeChild(chosenCards[0]);
   }
   // removes "selected" class from ALL cards in deck
@@ -106,7 +107,7 @@ document.body.onclick = function(e) {
     // toggled the selected state of the clicked card
     card.classList.toggle("selected");
 
-    // when three cards are selected
+    // when three cards are selected…
     if (selectedCards === 3) {
       // if they match: increase score, put cards back in deck, and deal new ones.
       // otherwise: deselect cards
@@ -118,6 +119,7 @@ document.body.onclick = function(e) {
       } else {
         setTimeout(deselectAllCards, 500);
       }
+      // resets selected cards variable
       selectedCards = 0;
     }
   }
