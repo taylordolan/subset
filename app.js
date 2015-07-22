@@ -1,7 +1,7 @@
 
 /*
  * todo:
- * make a function that renders cards from objects into HTML
+ * make a function that renders cards from objects into HTML (done)
  * make a dealer function that displays cards on the table
  */
 
@@ -11,24 +11,24 @@ var selectedCards = 0;
 var score = 0;
 
 var card1 = {
+  quantity: 1,
+  fill: 1,
   color: 1,
-  shape: 1,
-  quant: 1,
-  shade: 1
+  shape: 1
 }
 
 var card2 = {
+  quantity: 1,
+  fill: 1,
   color: 2,
-  shape: 1,
-  quant: 1,
-  shade: 1
+  shape: 1
 }
 
 var card3 = {
+  quantity: 1,
+  fill: 1,
   color: 3,
-  shape: 1,
-  quant: 1,
-  shade: 1
+  shape: 1
 }
 
 var deck = [card1, card2, card3];
@@ -67,6 +67,40 @@ function removeSelectedCards() {
 //   return card;
 // }
 
+function getCardQuantity(object) {
+  switch (object.color) {
+    case 1:
+      return "1";
+      break;
+    case 2:
+      return "1";
+      break;
+    case 3:
+      return "3";
+      break;
+    default:
+      console.log("error getting quantity");
+      break;
+  }
+}
+
+function getCardFill(object) {
+  switch (object.color) {
+    case 1:
+      return "empty";
+      break;
+    case 2:
+      return "shaded";
+      break;
+    case 3:
+      return "solid";
+      break;
+    default:
+      console.log("error getting fill");
+      break;
+  }
+}
+
 function getCardColor(object) {
   switch (object.color) {
     case 1:
@@ -84,13 +118,31 @@ function getCardColor(object) {
   }
 }
 
+function getCardShape(object) {
+  switch (object.color) {
+    case 1:
+      return "oval";
+      break;
+    case 2:
+      return "diamond";
+      break;
+    case 3:
+      return "squiggle";
+      break;
+    default:
+      console.log("error getting shape");
+      break;
+  }
+}
+
 function renderCard(object) {
   var card = document.createElement("div");
-  var cardText = document.createElement("p");
+  var quantity = getCardQuantity(object);
+  var fill = getCardFill(object);
   var color = getCardColor(object);
+  var shape = getCardShape(object);
+  card.innerHTML = "" + quantity + " " + fill + " " + color + " " + shape;
   card.classList.add("card");
-  cardText.innerHTML = color;
-  card.appendChild(cardText);
   return card;
 }
 
