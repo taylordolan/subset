@@ -2,7 +2,7 @@
 /*
  * todo:
  * make a function that renders cards from objects into HTML (done)
- * make a dealer function that displays cards on the table
+ * make a dealer function that displays cards on the table (done)
  */
 
 var cards = document.getElementById("cards");
@@ -20,20 +20,81 @@ var card1 = {
 var card2 = {
   quantity: 1,
   fill: 1,
+  color: 1,
+  shape: 2
+}
+
+var card3 = {
+  quantity: 1,
+  fill: 1,
+  color: 1,
+  shape: 3
+}
+
+var card4 = {
+  quantity: 1,
+  fill: 1,
   color: 2,
   shape: 1
 }
 
-var card3 = {
+var card5 = {
+  quantity: 1,
+  fill: 1,
+  color: 2,
+  shape: 2
+}
+
+var card6 = {
+  quantity: 1,
+  fill: 1,
+  color: 2,
+  shape: 3
+}
+
+var card7 = {
   quantity: 1,
   fill: 1,
   color: 3,
   shape: 1
 }
 
-var deck = [card1, card2, card3];
+var card8 = {
+  quantity: 1,
+  fill: 1,
+  color: 3,
+  shape: 2
+}
 
-// cards.appendChild(card1);
+var card9 = {
+  quantity: 1,
+  fill: 1,
+  color: 3,
+  shape: 3
+}
+
+var card10 = {
+  quantity: 1,
+  fill: 2,
+  color: 1,
+  shape: 1
+}
+
+var card11 = {
+  quantity: 1,
+  fill: 2,
+  color: 1,
+  shape: 2
+}
+
+var card12 = {
+  quantity: 1,
+  fill: 2,
+  color: 1,
+  shape: 3
+}
+
+var deck = [card1, card2, card3, card4, card5, card6, card7, card8, card9, card10, card11, card12];
 
 function removeSelectedCards() {
   var chosenCards = document.getElementsByClassName("selected");
@@ -143,29 +204,30 @@ function renderCard(object) {
   var shape = getCardShape(object);
   card.innerHTML = "" + quantity + " " + fill + " " + color + " " + shape;
   card.classList.add("card");
+  card.classList.add("styleA");
   return card;
 }
+
+// cards.appendChild(renderCard(card1));
+// cards.appendChild(renderCard(card2));
+// cards.appendChild(renderCard(card3));
 
 function Card(x,y) {
   this.x = x;
   this.y = y;
 }
 
-// cards in deck are in number order. this deals n cards, each from a random position in the deck.
-// function dealCards(n) {
-//   for(i=0; i<n; i++) {
-//     position = Math.floor(Math.random()*deck.length)
-//     cards.appendChild(deck[position]);
-//     // what does splice do?
-//     deck.splice(position, 1);
-//   }
-// }
+// this deals n cards, each from a random position in the deck.
+function dealCards(n) {
+  for(i=0; i<n; i++) {
+    position = Math.floor(Math.random()*deck.length)
+    cards.appendChild(renderCard(deck[position]));
+    // what does splice do?
+    deck.splice(position, 1);
+  }
+}
 
-// function dealCards(n) {
-//   for(i=0; i<nl i++) {
-//     cards.appendChild
-//   }
-// }
+dealCards(12);
 
 function deselectAllCards() {
   for (var i=0; i<cards.children.length; i++) {
