@@ -1,9 +1,39 @@
 
+/*
+ * todo:
+ * make a function that renders cards from objects into HTML
+ * make a dealer function that displays cards on the table
+ */
+
 var cards = document.getElementById("cards");
 var scoreBox = document.getElementById("score");
 var selectedCards = 0;
 var score = 0;
-var deck = [];
+
+var card1 = {
+  color: 1,
+  shape: 1,
+  quant: 1,
+  shade: 1
+}
+
+var card2 = {
+  color: 2,
+  shape: 1,
+  quant: 1,
+  shade: 1
+}
+
+var card3 = {
+  color: 3,
+  shape: 1,
+  quant: 1,
+  shade: 1
+}
+
+var deck = [card1, card2, card3];
+
+// cards.appendChild(card1);
 
 function removeSelectedCards() {
   var chosenCards = document.getElementsByClassName("selected");
@@ -24,28 +54,66 @@ function removeSelectedCards() {
 }
 
 // creates one card with number n on it
-function createCard(n) {
+// function createCard(n) {
+//   var card = document.createElement("div");
+//   var number = document.createElement("p");
+//   card.classList.add("card");
+//   if (Math.random()<0.5)
+//     card.classList.add("styleA");
+//   else
+//     card.classList.add("styleB");
+//   number.innerHTML = n;
+//   card.appendChild(number);
+//   return card;
+// }
+
+function getCardColor(object) {
+  switch (object.color) {
+    case 1:
+      return "red";
+      break;
+    case 2:
+      return "green";
+      break;
+    case 3:
+      return "purple";
+      break;
+    default:
+      console.log("error getting color");
+      break;
+  }
+}
+
+function renderCard(object) {
   var card = document.createElement("div");
-  var number = document.createElement("p");
+  var cardText = document.createElement("p");
+  var color = getCardColor(object);
   card.classList.add("card");
-  if (Math.random()<0.5)
-    card.classList.add("styleA");
-  else
-    card.classList.add("styleB");
-  number.innerHTML = n;
-  card.appendChild(number);
+  cardText.innerHTML = color;
+  card.appendChild(cardText);
   return card;
 }
 
-// cards in deck are in number order. this deals n cards, each from a random position in the deck.
-function dealCards(n) {
-  for(i=0; i<n; i++) {
-    position = Math.floor(Math.random()*deck.length)
-    cards.appendChild(deck[position]);
-    // what does splice do?
-    deck.splice(position, 1);
-  }
+function Card(x,y) {
+  this.x = x;
+  this.y = y;
 }
+
+// cards in deck are in number order. this deals n cards, each from a random position in the deck.
+// function dealCards(n) {
+//   for(i=0; i<n; i++) {
+//     position = Math.floor(Math.random()*deck.length)
+//     cards.appendChild(deck[position]);
+//     // what does splice do?
+//     deck.splice(position, 1);
+//   }
+// }
+
+// function dealCards(n) {
+//   for(i=0; i<nl i++) {
+//     cards.appendChild
+//   }
+// }
 
 function deselectAllCards() {
   for (var i=0; i<cards.children.length; i++) {
@@ -84,11 +152,12 @@ function doSelectedCardsMatch() {
 // SETUP
 
 // create 81 cards and puts them in deck
-for (i=0;i<81;i++) {
-  deck.push(createCard(i));
-}
+// for (i=0;i<81;i++) {
+//   deck.push(createCard(i));
+// }
+
 // puts 12 cards on table
-dealCards(12);
+// dealCards(3);
 
 // END SETUP
 
