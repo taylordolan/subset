@@ -1,135 +1,127 @@
 
 /*
- * todo:
- * make a function that renders cards from objects into HTML (done)
- * make a dealer function that displays cards on the table (done)
+ todo:
  */
 
 var cards = document.getElementById("cards");
 var scoreBox = document.getElementById("score");
-var selectedCards = 0;
+var deck = [];
+var table = [];
+var selectedCards = [];
 var score = 0;
 
 var card1 = {
-  quantity: 1,
+  id: 1,
+  count: 1,
   fill: 1,
   color: 1,
-  shape: 1
+  shape: 1,
+  selected: false
 }
-
 var card2 = {
-  quantity: 1,
-  fill: 1,
-  color: 1,
-  shape: 2
+  id: 2,
+  count: 2,
+  fill: 2,
+  color: 2,
+  shape: 2,
+  selected: false
 }
-
 var card3 = {
-  quantity: 1,
-  fill: 1,
-  color: 1,
-  shape: 3
+  id: 3,
+  count: 3,
+  fill: 3,
+  color: 3,
+  shape: 3,
+  selected: false
 }
-
 var card4 = {
-  quantity: 1,
+  id: 4,
+  count: 1,
   fill: 1,
   color: 2,
-  shape: 1
+  shape: 1,
+  selected: false
 }
-
 var card5 = {
-  quantity: 1,
+  id: 5,
+  count: 1,
   fill: 1,
   color: 2,
-  shape: 2
+  shape: 2,
+  selected: false
 }
-
 var card6 = {
-  quantity: 1,
+  id: 6,
+  count: 1,
   fill: 1,
   color: 2,
-  shape: 3
+  shape: 3,
+  selected: false
 }
-
 var card7 = {
-  quantity: 1,
+  id: 7,
+  count: 1,
   fill: 1,
   color: 3,
-  shape: 1
+  shape: 1,
+  selected: false
 }
-
 var card8 = {
-  quantity: 1,
+  id: 8,
+  count: 1,
   fill: 1,
   color: 3,
-  shape: 2
+  shape: 2,
+  selected: false
 }
-
 var card9 = {
-  quantity: 1,
+  id: 9,
+  count: 1,
   fill: 1,
   color: 3,
-  shape: 3
+  shape: 3,
+  selected: false
 }
-
 var card10 = {
-  quantity: 1,
+  id: 10,
+  count: 1,
   fill: 2,
   color: 1,
-  shape: 1
+  shape: 1,
+  selected: false
 }
-
 var card11 = {
-  quantity: 1,
+  id: 11,
+  count: 1,
   fill: 2,
   color: 1,
-  shape: 2
+  shape: 2,
+  selected: false
 }
-
 var card12 = {
-  quantity: 1,
+  id: 12,
+  count: 1,
   fill: 2,
   color: 1,
-  shape: 3
+  shape: 3,
+  selected: false
 }
 
-var deck = [card1, card2, card3, card4, card5, card6, card7, card8, card9, card10, card11, card12];
+deck = [card1, card2, card3, card4, card5, card6, card7, card8, card9, card10, card11, card12];
 
-function removeSelectedCards() {
-  var chosenCards = document.getElementsByClassName("selected");
-  var parent = chosenCards[0].parentNode;
-  // adds selected cards back to the deck
-  for (i=0; i<chosenCards.length; i++) {
-    deck.push(chosenCards[i])
-  }
-  // removes selected cards from table
-  for (i=0; i<chosenCards.length; i++) {
-    parent.removeChild(chosenCards[0]);
-  }
-  // removes "selected" class from ALL cards in deck
-  for (i=0; i<deck.length; i++) {
-    card = deck[i];
-    card.classList.remove("selected");
+function dealCards(n) {
+  for(i=0; i<n; i++) {
+    // picks a random spot in the deck
+    var position = Math.floor(Math.random()*deck.length)
+    // takes the card at position and adds to to table[]
+    table.push(deck[position]);
+    // removes card at position from deck[]
+    deck.splice(position, 1);
   }
 }
 
-// creates one card with number n on it
-// function createCard(n) {
-//   var card = document.createElement("div");
-//   var number = document.createElement("p");
-//   card.classList.add("card");
-//   if (Math.random()<0.5)
-//     card.classList.add("styleA");
-//   else
-//     card.classList.add("styleB");
-//   number.innerHTML = n;
-//   card.appendChild(number);
-//   return card;
-// }
-
-function getCardQuantity(object) {
-  switch (object.color) {
+function getCardcount(object) {
+  switch (object.count) {
     case 1:
       return "1";
       break;
@@ -140,13 +132,13 @@ function getCardQuantity(object) {
       return "3";
       break;
     default:
-      console.log("error getting quantity");
+      console.log("error getting count");
       break;
   }
 }
 
 function getCardFill(object) {
-  switch (object.color) {
+  switch (object.fill) {
     case 1:
       return "empty";
       break;
@@ -180,7 +172,7 @@ function getCardColor(object) {
 }
 
 function getCardShape(object) {
-  switch (object.color) {
+  switch (object.shape) {
     case 1:
       return "oval";
       break;
@@ -198,36 +190,36 @@ function getCardShape(object) {
 
 function renderCard(object) {
   var card = document.createElement("div");
-  var quantity = getCardQuantity(object);
+  var id = object.id;
+  var count = getCardcount(object);
   var fill = getCardFill(object);
   var color = getCardColor(object);
   var shape = getCardShape(object);
-  card.innerHTML = "" + quantity + " " + fill + " " + color + " " + shape;
+  card.setAttribute("data-id",id);
+  card.innerHTML = "" + count + " " + fill + " " + color + " " + shape;
   card.classList.add("card");
   card.classList.add("styleA");
+  if (object.selected === true) {
+    card.classList.add("selected");
+  }
   return card;
 }
 
-// cards.appendChild(renderCard(card1));
-// cards.appendChild(renderCard(card2));
-// cards.appendChild(renderCard(card3));
+function renderTable(array) {
+  // remove all cards from DOM
+  while(cards.firstChild) {
+    cards.removeChild(cards.firstChild);
+  }
+  // re-render all cards
+  for(i=0; i<array.length; i++) {
+    cards.appendChild(renderCard(array[i]));
+  }
+}
 
 function Card(x,y) {
   this.x = x;
   this.y = y;
 }
-
-// this deals n cards, each from a random position in the deck.
-function dealCards(n) {
-  for(i=0; i<n; i++) {
-    position = Math.floor(Math.random()*deck.length)
-    cards.appendChild(renderCard(deck[position]));
-    // what does splice do?
-    deck.splice(position, 1);
-  }
-}
-
-dealCards(12);
 
 function deselectAllCards() {
   for (var i=0; i<cards.children.length; i++) {
@@ -236,72 +228,94 @@ function deselectAllCards() {
   }
 }
 
-function doSelectedCardsMatch() {
-  var selectedCards = document.getElementsByClassName("selected");
-  var matched = 0;
-  // loops through selected cards, incrementing the "matched" variable if they match
-  if (selectedCards[0].classList.contains("styleA")) {
-    for (var i=0; i<selectedCards.length; i++) {
-      if (selectedCards[i].classList.contains("styleA")) {
-        matched++;
-      }
-    }
-  } else if (selectedCards[0].classList.contains("styleB")) {
-    for (var i=0; i<selectedCards.length; i++) {
-      if (selectedCards[i].classList.contains("styleB")) {
-        matched++;
-      }
-    }
-  } else {
-    console.log("hey there's an error");
+// SET UP
+
+dealCards(12);
+renderTable(table);
+
+// END SET UP
+
+var chosen = [card1, card2, card3];
+
+function checkForMatch(array) {
+  var match = 0;
+  var colorTotal = 0
+  var fillTotal = 0
+  var countTotal = 0
+  var shapeTotal = 0
+  for (var i=0; i<array.length; i++) {
+    colorTotal += array[i].color
+    fillTotal += array[i].fill
+    countTotal += array[i].count
+    shapeTotal += array[i].shape
+  }
+  if (colorTotal % 3 === 0) {
+    match++
+  }
+  if (fillTotal % 3 === 0) {
+    match++
+  }
+  if (countTotal % 3 === 0) {
+    match++
+  }
+  if (shapeTotal % 3 === 0) {
+    match++
   }
 
-  if (matched === 3) {
-    return true;
+  if (match === 4) {
+    return true
   } else {
-    return false;
+    return false
   }
 }
 
-// SETUP
+// takes an html card element and an array of card objects
+// returns the card object in the array that matches the html element
+function matchCardElementToObject(cardElement,cardArray) {
+  // the value of the html card elemtent's 'data-id' attribute
+  var cardElementId = parseInt(cardElement.getAttribute('data-id'));
+  // loops through the array and returns the card object whose id matches cardElementId
+  for (var i=0; i<cardArray.length; i++) {
+    var cardObject = cardArray[i];
+    if (cardObject.id === cardElementId) {
+      return cardObject;
+    }
+  }
+}
 
-// create 81 cards and puts them in deck
-// for (i=0;i<81;i++) {
-//   deck.push(createCard(i));
-// }
-
-// puts 12 cards on table
-// dealCards(3);
-
-// END SETUP
+function toggleSelected(cardObject) {
+  if (cardObject.selected === true) {
+    cardObject.selected = false;
+  } else if (cardObject.selected === false) {
+    cardObject.selected = true;
+  } else {
+    console.log("error setting 'selected' value for given object")
+  }
+}
 
 document.body.onclick = function(e) {
 
-  // increments and decrements the number of selected cards when a card is clicked
   if (e.target.classList.contains("card")) {
-    var card = e.target
-    if (!card.classList.contains("selected")) {
-      selectedCards++;
-    } else {
-      selectedCards--;
+
+    var clickedObject = matchCardElementToObject(e.target,table);
+    toggleSelected(clickedObject);
+    console.log(clickedObject.id);
+
+    while(selectedCards[0]) {
+      selectedCards.pop(selectedCards[0]);
     }
 
-    // toggled the selected state of the clicked card
-    card.classList.toggle("selected");
-
-    // when three cards are selected
-    if (selectedCards === 3) {
-      // if they match: increase score, put cards back in deck, and deal new ones.
-      // otherwise: deselect cards
-      if (doSelectedCardsMatch()) {
-        setTimeout(removeSelectedCards, 500);
-        score++;
-        scoreBox.innerHTML = score;
-        dealCards(3);
-      } else {
-        setTimeout(deselectAllCards, 500);
+    for (var i=0; i<table.length; i++) {
+      card = table[i];
+      if (card.selected === true) {
+        selectedCards.push(card);
       }
-      selectedCards = 0;
     }
+
+    if (selectedCards.length === 3 && checkForMatch(selectedCards)) {
+      console.log("it's a match!")
+    }
+
+    renderTable(table);
   }
 }
