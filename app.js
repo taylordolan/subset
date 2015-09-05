@@ -884,6 +884,13 @@ document.body.onclick = function(e) {
           }
         }
         dealCards(3);
+        if (deck.length === 0) {
+          while (discard.length) {
+            var position = Math.floor(Math.random()*discard.length)
+            deck.push(discard[position]);
+            discard.splice(position, 1);
+          }
+        }
       } else {
         console.log("not a match");
       }
