@@ -14,7 +14,8 @@ html, body, #cards {
   flex-direction: column;
   float: left;
   box-sizing: border-box;
-  border: 1px solid lightgray; }
+  border: 1px solid lightgray;
+  cursor: pointer; }
 
 .card div {
   width: 25%;
