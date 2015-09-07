@@ -18,7 +18,8 @@ html, body, #cards {
 
 .card div {
   width: 25%;
-  padding-bottom: 25%; }
+  padding-bottom: 25%;
+  pointer-events: none; }
 
 .solid div {
   background-color: currentColor; }
