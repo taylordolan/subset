@@ -674,7 +674,7 @@ function getCardcount(object) {
       return "1";
       break;
     case 2:
-      return "1";
+      return "2";
       break;
     case 3:
       return "3";
@@ -744,9 +744,55 @@ function renderCard(object) {
   var color = getCardColor(object);
   var shape = getCardShape(object);
   card.setAttribute("data-id",id);
-  card.innerHTML = "" + count + " " + fill + " " + color + " " + shape;
+  // card.innerHTML  = "" + count + " " + fill + " " + color + " " + shape;
+  switch (count) {
+    case "1":
+      card.appendChild(document.createElement("div"));
+      break;
+    case "2":
+      card.appendChild(document.createElement("div"));
+      card.appendChild(document.createElement("div"));
+      break;
+    case "3":
+      card.appendChild(document.createElement("div"));
+      card.appendChild(document.createElement("div"));
+      card.appendChild(document.createElement("div"));
+      break;
+  }
+  switch (color) {
+    case "red":
+      card.classList.add("red");
+      break;
+    case "green":
+      card.classList.add("green");
+      break;
+    case "purple":
+      card.classList.add("purple");
+      break;
+  }
+  switch (fill) {
+    case "solid":
+      card.classList.add("solid");
+      break;
+    case "empty":
+      card.classList.add("empty");
+      break;
+    case "shaded":
+      card.classList.add("shaded");
+      break;
+  }
+  switch (shape) {
+    case "oval":
+      card.classList.add("oval");
+      break;
+    case "diamond":
+      card.classList.add("diamond");
+      break;
+    case "squiggle":
+      card.classList.add("squiggle");
+      break;
+  }
   card.classList.add("card");
-  card.classList.add("styleA");
   if (object.selected === true) {
     card.classList.add("selected");
   }
