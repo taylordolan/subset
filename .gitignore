@@ -1,6 +1,6 @@
 
-*.scss
-
 *.map
 
 *.scssc
+
+*.css
