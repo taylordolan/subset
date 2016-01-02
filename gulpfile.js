@@ -9,23 +9,23 @@ var uglify = require('gulp-uglify');
 
 //concatenate and minify js files
 gulp.task('scripts', function() {
-    return gulp.src('src/js/*.js')
-      .pipe(concat('main.js'))
-        .pipe(rename({suffix: '.min'}))
-        .pipe(uglify())
-        .pipe(gulp.dest('build/js'));
+  return gulp.src(['src/js/deck.js', 'src/js/app.js'])
+    .pipe(concat('main.js'))
+      .pipe(rename({suffix: '.min'}))
+      // .pipe(uglify())
+      .pipe(gulp.dest('build/js'));
 });
 
 // compile css from scss files
 gulp.task('sass', function() {
-    return sass('src/scss/index.scss', {style: 'compressed'})
-        .pipe(rename({suffix: '.min'}))
-        .pipe(gulp.dest('build/css'));
+  return sass('src/scss/index.scss', {style: 'compressed'})
+      .pipe(rename({suffix: '.min'}))
+      .pipe(gulp.dest('build/css'));
 });
 
 gulp.task('copy-index', function() {
-    gulp.src('index.html')
-    .pipe(gulp.dest('build/'));
+  gulp.src('index.html')
+  .pipe(gulp.dest('build/'));
 });
 
 // watch js and scss files
