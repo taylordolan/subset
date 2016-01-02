@@ -21,11 +21,12 @@ body,
   flex-direction: column;
   float: left;
   height: 33.333%;
-  justify-content: space-around;
+  justify-content: center;
   position: relative;
   width: 25%;
 
   div {
+    margin: 5%;
     padding-bottom: 25%;
     pointer-events: none;
     width: 25%;

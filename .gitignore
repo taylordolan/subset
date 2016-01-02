@@ -1,6 +1,5 @@
-
-*.map
-
-*.scssc
-
 *.css
+*.map
+*.scssc
+build/
+node_modules/
