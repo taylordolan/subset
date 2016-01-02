@@ -1,4 +1,4 @@
-var cards = document.getElementById("cards");
+var cards = document.getElementsByClassName("cards")[0];
 var scoreBox = document.getElementById("score");
 var deck = [];
 var discard = [];
