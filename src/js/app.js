@@ -236,6 +236,32 @@ function toggleSelected(cardObject) {
   }
 }
 
+function removeAllClasses(e) {
+  for (var i=0; i<e.classList.length; i++) {
+    e.classList.remove(e.classList[i]);
+  }
+}
+
+function applyClassForViewportSize() {
+  var body = document.body;
+  var height = window.innerHeight;
+  var width = window.innerWidth;
+  removeAllClasses(body);
+  if (width / height <= 2/2) {
+    body.classList.add("x-narrow");
+  } else if (width / height <= 3/2) {
+    body.classList.add("narrow")
+  } else if (width / height <= 4/2) {
+    body.classList.add("wide")
+  } else if (width / height > 4/2) {
+    body.classList.add("x-wide")
+  }
+}
+
+applyClassForViewportSize();
+
+window.onresize = applyClassForViewportSize;
+
 document.body.onclick = function(e) {
 
   if (e.target.classList.contains("card")) {
