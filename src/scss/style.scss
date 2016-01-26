@@ -24,45 +24,59 @@ body {
   justify-content: center;
   position: relative;
 
-  .x-narrow & {
+  .size-1 & {
+    flex-direction: column;
+    height: 16.667%;
+    width: 50%;
+  }
+
+  .size-2 & {
+    flex-direction: row;
+    height: 16.667%;
+    width: 50%;
+  }
+
+  .size-3 & {
+    flex-direction: column;
+    height: 25%;
+    width: 33.333%;
+  }
+
+  .size-4 & {
+    flex-direction: row;
+    height: 25%;
+    width: 33.333%;
+  }
+
+  .size-5 & {
     flex-direction: column;
     height: 33.333%;
     width: 25%;
   }
 
-  .narrow & {
-    flex-direction: column;
-    height: 33.333%;
-    width: 25%;
-  }
-
-  .wide & {
+  .size-6 & {
     flex-direction: row;
     height: 33.333%;
     width: 25%;
   }
 
-  .x-wide & {
+  .size-7 & {
     flex-direction: row;
-    height: 33.333%;
-    width: 25%;
+    height: 50%;
+    width: 16.667%;
   }
 
   div {
-    margin: 5%;
-    padding-bottom: 25%;
+    border: 5px solid currentColor;
+    margin: 3%;
+    padding-bottom: 12%;
     pointer-events: none;
-    width: 25%;
+    width: 12%;
   }
 }
 
 .solid div {
   background-color: currentColor;
-}
-
-.empty div,
-.shaded div {
-  border: 4px solid currentColor;
 }
 
 .shaded.green div {
@@ -82,9 +96,9 @@ body {
 }
 
 .diamond div {
-  padding-bottom: 20%;
-  transform: rotate(45deg);
-  width: 20%;
+  // padding-bottom: 20%;
+  // transform: rotate(45deg);
+  // width: 20%;
 }
 
 .selected {

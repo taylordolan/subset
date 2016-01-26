@@ -247,14 +247,20 @@ function applyClassForViewportSize() {
   var height = window.innerHeight;
   var width = window.innerWidth;
   removeAllClasses(body);
-  if (width / height <= 2/2) {
-    body.classList.add("x-narrow");
-  } else if (width / height <= 3/2) {
-    body.classList.add("narrow")
-  } else if (width / height <= 4/2) {
-    body.classList.add("wide")
-  } else if (width / height > 4/2) {
-    body.classList.add("x-wide")
+  if (width/height <= 0.333) {
+    body.classList.add("size-1");
+  } else if (width / height <= 0.55) {
+    body.classList.add("size-2");
+  } else if (width / height <= 0.75) {
+    body.classList.add("size-3")
+  } else if (width / height <= 1.2) {
+    body.classList.add("size-4")
+  } else if (width / height <= 1.33) {
+    body.classList.add("size-5")
+  } else if (width / height <= 3) {
+    body.classList.add("size-6")
+  } else {
+    body.classList.add("size-7")
   }
 }
 
