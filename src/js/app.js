@@ -70,7 +70,7 @@ function getCardColor(object) {
 function getCardShape(object) {
   switch (object.shape) {
     case 1:
-      return "oval";
+      return "circle";
       break;
     case 2:
       return "curve";
@@ -130,8 +130,8 @@ function renderCard(object) {
       break;
   }
   switch (shape) {
-    case "oval":
-      card.classList.add("oval");
+    case "circle":
+      card.classList.add("circle");
       break;
     case "curve":
       card.classList.add("curve");
