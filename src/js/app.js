@@ -73,7 +73,7 @@ function getCardShape(object) {
       return "oval";
       break;
     case 2:
-      return "diamond";
+      return "curve";
       break;
     case 3:
       return "squiggle";
@@ -133,8 +133,8 @@ function renderCard(object) {
     case "oval":
       card.classList.add("oval");
       break;
-    case "diamond":
-      card.classList.add("diamond");
+    case "curve":
+      card.classList.add("curve");
       break;
     case "squiggle":
       card.classList.add("squiggle");
