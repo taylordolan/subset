@@ -9,7 +9,7 @@ var uglify = require('gulp-uglify');
 
 //concatenate and minify js files
 gulp.task('scripts', function() {
-  return gulp.src(['src/js/deck.js', 'src/js/app.js'])
+  return gulp.src(['src/js/vars.js', 'src/js/deck.js', 'src/js/functions.js', 'src/js/app.js'])
     .pipe(concat('main.js'))
       .pipe(rename({suffix: '.min'}))
       // .pipe(uglify())
