@@ -158,26 +158,12 @@ function renderTable(array) {
   }
 }
 
-function Card(x,y) {
-  this.x = x;
-  this.y = y;
-}
-
 function deselectAllCards() {
   for (var i=0; i<cards.children.length; i++) {
     cards.children[i].classList.remove("selected");
     selectedCards = 0;
   }
 }
-
-// SET UP
-
-dealCards(12);
-renderTable(table);
-
-// END SET UP
-
-// var chosen = [card1, card2, card3];
 
 function checkForMatch(array) {
   var match = 0;
@@ -236,35 +222,42 @@ function toggleSelected(cardObject) {
   }
 }
 
+// takes an element and removes all classes from it
 function removeAllClasses(e) {
   for (var i=0; i<e.classList.length; i++) {
     e.classList.remove(e.classList[i]);
   }
 }
 
+// applies classes to body based on the width/height proportion of the viewport
 function applyClassForViewportSize() {
   var body = document.body;
-  var height = window.innerHeight;
-  var width = window.innerWidth;
+  var proportion = window.innerWidth / window.innerHeight;
   removeAllClasses(body);
-  if (width/height <= 0.333) {
+  if (proportion <= 0.333) {
     body.classList.add("size-1");
-  } else if (width / height <= 0.55) {
+  } else if (proportion <= 0.55) {
     body.classList.add("size-2");
-  } else if (width / height <= 0.75) {
+  } else if (proportion <= 0.75) {
     body.classList.add("size-3")
-  } else if (width / height <= 1.2) {
+  } else if (proportion <= 1.2) {
     body.classList.add("size-4")
-  } else if (width / height <= 1.33) {
+  } else if (proportion <= 1.33) {
     body.classList.add("size-5")
-  } else if (width / height <= 3) {
+  } else if (proportion <= 3) {
     body.classList.add("size-6")
   } else {
     body.classList.add("size-7")
   }
 }
 
+// SET UP
+
 applyClassForViewportSize();
+dealCards(12);
+renderTable(table);
+
+// END SET UP
 
 window.onresize = applyClassForViewportSize;
 
