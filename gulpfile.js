@@ -6,6 +6,7 @@ var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var sass = require('gulp-ruby-sass');
 var uglify = require('gulp-uglify');
+var ghPages = require('gulp-gh-pages');
 
 //concatenate and minify js files
 gulp.task('scripts', function() {
@@ -37,3 +38,9 @@ gulp.task('watch', function() {
 
 // default task
 gulp.task('default', ['scripts', 'sass', 'copy-index', 'watch']);
+
+// deploy to github pages
+gulp.task('deploy', function() {
+  return gulp.src('./build/**/*')
+    .pipe(ghPages());
+});
